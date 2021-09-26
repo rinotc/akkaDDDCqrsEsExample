@@ -1,3 +1,5 @@
+import Dependencies._
+
 lazy val baseSettings = Seq(
   organization := "com.github.rinotc",
   version := "0.1",
@@ -14,5 +16,21 @@ lazy val baseSettings = Seq(
 lazy val `api-server` = (project in file("api-server"))
   .settings(baseSettings)
   .settings(
-    name := "bank-api-server"
+    name := "bank-api-server",
+    libraryDependencies ++= Seq(
+      Logback.classic,
+      TypeSafe.config,
+      TypeSafe.Akka.actor,
+      TypeSafe.Akka.http,
+      TypeSafe.Akka.testKit
+    )
+  )
+
+lazy val `interface` = (project in file("interface"))
+  .settings(baseSettings)
+  .settings(
+    name := "bank-interface",
+    libraryDependencies ++= Seq(
+      TypeSafe.Akka.http
+    )
   )
