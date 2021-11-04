@@ -22,6 +22,7 @@ lazy val `api-server` = (project in file("api-server"))
       TypeSafe.config,
       TypeSafe.Akka.actor,
       TypeSafe.Akka.http,
+      TypeSafe.Akka.stream,
       TypeSafe.Akka.testKit
     )
   )
