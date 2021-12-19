@@ -23,18 +23,32 @@ lazy val `api-server` = (project in file("api-server"))
     libraryDependencies ++= Seq(
       Logback.classic,
       TypeSafe.config,
-      TypeSafe.Akka.actor,
+      TypeSafe.Akka.actorTyped,
       TypeSafe.Akka.http,
       TypeSafe.Akka.stream,
       TypeSafe.Akka.testKit
     )
   )
 
+lazy val `use-case` = (project in file("use-case"))
+  .settings(
+    name := "bank-use-case",
+    Test / parallelExecution := false
+  )
+  .dependsOn(`domain`)
+
 lazy val `interface` = (project in file("interface"))
+  .dependsOn(`use-case`)
   .settings(
     name := "bank-interface",
     libraryDependencies ++= Seq(
-      TypeSafe.Akka.http
+      TypeSafe.Akka.actorTyped,
+      TypeSafe.Akka.http,
+      TypeSafe.Akka.persistenceTyped,
+      Heikoseeberger.akkaHttpCirce,
+      ScalikeJDBC.scalikeJDBC,
+      PostgreSQL.postgreSQL,
+      PureConfig.pureConfig,
+      Logback.classic
     )
   )
-
